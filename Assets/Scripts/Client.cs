@@ -40,6 +40,20 @@ public class Client : MonoBehaviour
         public TCP()
         {
         }
+        public void SendData(Packet _packet)
+        {
+            try
+            {
+                if (Socket != null)
+                {
+                    stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error sending data to player " + e);
+            }
+        }
 
         public void Connect()
         {
