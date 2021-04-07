@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
     public static int DataBufferSize = 4096;
-    public string IPAddress = "127.0.0.1";
+    public string IP = "127.0.0.1";
 
     public int Port = 90;
     public int MyID;
@@ -15,12 +16,16 @@ public class Client : MonoBehaviour
     [HideInInspector]
     public TCP Tcp;
 
+    [HideInInspector]
+    public UDP Udp;
+
 
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
     void Start()
     { 
         Tcp = new TCP();
+        Udp = new UDP();
     }
 
     public void ConnectToServer()
@@ -63,7 +68,7 @@ public class Client : MonoBehaviour
                 SendBufferSize = DataBufferSize
             };
             receiveBuffer = new byte[DataBufferSize];
-            Socket.BeginConnect(Instance.IPAddress, Instance.Port, ConnectCallBack, Socket);
+            Socket.BeginConnect(Instance.IP, Instance.Port, ConnectCallBack, Socket);
         }
         private void ConnectCallBack(IAsyncResult _result)
         {
@@ -140,12 +145,86 @@ public class Client : MonoBehaviour
             return false;
         }
     }
+    public class UDP
+    {
+        public UdpClient Socket;
+        public IPEndPoint EndPoint;
 
+        public UDP()
+        {
+            EndPoint = new IPEndPoint(IPAddress.Parse(Instance.IP), Instance.Port);
+        }
+
+        public void Connect(int _localPort)
+        {
+            Socket = new UdpClient(_localPort);
+            Socket.Connect(EndPoint);
+            Socket.BeginReceive(ReceiveCallBack, null);
+
+            using (Packet _packet = new Packet())
+            {
+                SendData(_packet);
+            }
+        }
+        public void SendData(Packet _packet)
+        {
+            try
+            {
+                _packet.InsertInt(Instance.MyID);
+                if(Socket != null)
+                {
+                    Socket.BeginSend(_packet.ToArray(), _packet.Length(), null, null);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+
+        private void ReceiveCallBack(IAsyncResult _result)
+        {
+            try
+            {
+                byte[] _data = Socket.EndReceive(_result, ref EndPoint);
+                Socket.BeginReceive(ReceiveCallBack, null);
+
+                if(_data.Length < 4)
+                {
+                    return;
+                }
+                HandleData(_data);
+            }
+            catch(Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+
+        private void HandleData(byte[] _data)
+        {
+            using (Packet _packet = new Packet(_data))
+            {
+                int _packetLength = _packet.ReadInt();
+                _data = _packet.ReadBytes(_packetLength);
+            }
+
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                using (Packet _packet = new Packet(_data))
+                {
+                    int _packetId = _packet.ReadInt();
+                    packetHandlers[_packetId](_packet);
+                }
+            });
+        }
+    }
     private void InitializeClientData()
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
-            {(int)ServerPackets.welcome,ClientHandle.Welcome}
+            {(int)ServerPackets.welcome,ClientHandle.Welcome},
+            {(int)ServerPackets.udpTest,ClientHandle.UDPTest}
         };
         Debug.Log("Client data inited");
     }
