@@ -16,10 +16,16 @@ public class ClientHandle : MonoBehaviour
         Client.Instance.Udp.Connect(((IPEndPoint)Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
     }
 
-    public static void UDPTest(Packet _packet)
+    
+    public static void SpawnPlayer(Packet _packet)
     {
-        string _msg = _packet.ReadString();
-        Debug.Log("Message from server " + _msg);
-        ClientSend.UDPTestReceived();
+        int _id = _packet.ReadInt();
+        string _username = _packet.ReadString();
+        Vector3 _pos = _packet.ReadVector3();
+        Quaternion _rot = _packet.ReadQuaternion();
+
+        GameManager.Instance.SpawnPlayer(_id,_username,_pos,_rot);
     }
+
+
 }
