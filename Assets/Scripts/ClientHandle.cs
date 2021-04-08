@@ -16,7 +16,7 @@ public class ClientHandle : MonoBehaviour
         Client.Instance.Udp.Connect(((IPEndPoint)Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
     }
 
-    
+
     public static void SpawnPlayer(Packet _packet)
     {
         int _id = _packet.ReadInt();
@@ -24,7 +24,16 @@ public class ClientHandle : MonoBehaviour
         Vector3 _pos = _packet.ReadVector3();
         Quaternion _rot = _packet.ReadQuaternion();
 
-        GameManager.Instance.SpawnPlayer(_id,_username,_pos,_rot);
+        GameManager.Instance.SpawnPlayer(_id, _username, _pos, _rot);
+    }
+
+    public static void MovePlayer(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        Vector3 _pos = _packet.ReadVector3();
+        Quaternion _rot = _packet.ReadQuaternion();
+
+        GameManager.Instance.MovePlayer(_id,_pos,_rot);
     }
 
 

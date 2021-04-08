@@ -225,6 +225,7 @@ public class Client : MonoBehaviour
         {
             {(int)ServerPackets.welcome,ClientHandle.Welcome},
             {(int)ServerPackets.spawnPlayer,ClientHandle.SpawnPlayer},
+            {(int)ServerPackets.playerMovement,ClientHandle.MovePlayer}
         };
         Debug.Log("Client data inited");
     }

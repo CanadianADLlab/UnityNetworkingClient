@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class ClientSend : MonoBehaviour
 {
-   private static void SendTCPData(Packet _packet)
+    private static void SendTCPData(Packet _packet)
     {
         _packet.WriteLength();
-        Debug.Log("Sending data");
         Client.Instance.Tcp.SendData(_packet);
     }
     private static void SendUDPData(Packet _packet)
     {
         _packet.WriteLength();
-        Debug.Log("Sending data");
         Client.Instance.Udp.SendData(_packet);
     }
 
@@ -24,6 +22,17 @@ public class ClientSend : MonoBehaviour
             _packet.Write(Client.Instance.MyID);
             _packet.Write(UIManager.Instance.UserNameField.text);
             SendTCPData(_packet);
+        }
+    }
+
+    public static void SendPlayerValues(Vector3 _pos, Quaternion _rot)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
+        {
+            _packet.Write(Client.Instance.MyID);
+            _packet.Write(_pos);
+            _packet.Write(_rot);
+            SendUDPData(_packet);
         }
     }
 

@@ -20,13 +20,23 @@ public class GameManager : MonoBehaviour
         {
             _player = GameObject.Instantiate(PlayerPrefab, _position, _rotation);
         }
-        _player.transform.name = _username + ":ID:"+_id;
+        _player.transform.name = _username + ":ID:" + _id;
 
         _player.GetComponent<PlayerManager>().ID = _id;
         _player.GetComponent<PlayerManager>().UserName = _username;
 
         players.Add(_id, _player.GetComponent<PlayerManager>());
-     
+
+    }
+
+    public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot)
+    {
+        Debug.Log("Moving player " + _id);
+        if (_id != Client.Instance.MyID)
+        {
+            players[_id].transform.position = _pos;
+            players[_id].transform.rotation = _rot;
+        }
     }
     #region singleton
     public static GameManager Instance;
