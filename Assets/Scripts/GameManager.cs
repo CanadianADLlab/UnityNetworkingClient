@@ -31,11 +31,12 @@ public class GameManager : MonoBehaviour
 
     public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot)
     {
-        Debug.Log("Moving player " + _id);
+        Debug.Log("Moving player with the id of " + _id );
         if (_id != Client.Instance.MyID)
         {
             players[_id].transform.position = _pos;
             players[_id].transform.rotation = _rot;
+            Debug.Log("Moving player " + _id + " THe pos is  " +  _pos);
         }
     }
     #region singleton

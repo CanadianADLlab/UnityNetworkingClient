@@ -12,6 +12,7 @@ public class Client : MonoBehaviour
 
     public int Port = 90;
     public int MyID;
+    public bool isConnected = false;
      
     [HideInInspector]
     public TCP Tcp;
@@ -19,7 +20,7 @@ public class Client : MonoBehaviour
     [HideInInspector]
     public UDP Udp;
 
-
+  
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
     void Start()

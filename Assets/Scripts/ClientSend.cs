@@ -21,18 +21,23 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(Client.Instance.MyID);
             _packet.Write(UIManager.Instance.UserNameField.text);
+            Client.Instance.isConnected = true; // receives response from the server so we connected
             SendTCPData(_packet);
         }
     }
 
     public static void SendPlayerValues(Vector3 _pos, Quaternion _rot)
     {
-        using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
+        if (Client.Instance && Client.Instance.isConnected)
         {
-            _packet.Write(Client.Instance.MyID);
-            _packet.Write(_pos);
-            _packet.Write(_rot);
-            SendUDPData(_packet);
+            using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
+            {
+                Debug.Log("my id im sending " + Client.Instance.MyID);
+                _packet.Write(Client.Instance.MyID);
+                _packet.Write(_pos);
+                _packet.Write(_rot);
+                SendUDPData(_packet);
+            }
         }
     }
 
