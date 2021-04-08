@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class NetworkManager : MonoBehaviour
 {
-    public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
+    public static Dictionary<int, PlayerManager> Players = new Dictionary<int, PlayerManager>();
+    public static Dictionary<int, NetworkGameObject> TrackedObjects = new Dictionary<int, NetworkGameObject>();
 
     public GameObject LocalPlayerPrefab;
     public GameObject PlayerPrefab;
@@ -25,22 +26,33 @@ public class GameManager : MonoBehaviour
         _player.GetComponent<PlayerManager>().ID = _id;
         _player.GetComponent<PlayerManager>().UserName = _username;
 
-        players.Add(_id, _player.GetComponent<PlayerManager>());
+        Players.Add(_id, _player.GetComponent<PlayerManager>());
 
     }
+
 
     public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot)
     {
-        Debug.Log("Moving player with the id of " + _id );
+        Debug.Log("Moving player with the id of " + _id);
         if (_id != Client.Instance.MyID)
         {
-            players[_id].transform.position = _pos;
-            players[_id].transform.rotation = _rot;
-            Debug.Log("Moving player " + _id + " THe pos is  " +  _pos);
+            Players[_id].transform.position = _pos;
+            Players[_id].transform.rotation = _rot;
+            Debug.Log("Moving player " + _id + " THe pos is  " + _pos);
         }
     }
+    public void MoveObject(int _id,int _objectNetID, Vector3 _pos, Quaternion _rot)
+    {
+        Debug.Log("Moving player with the id of " + _id);
+        if (_id != Client.Instance.MyID)
+        {
+            TrackedObjects[_objectNetID].SetPositionAndRot(_pos,_rot);
+            Debug.Log("Moving player " + _id + " THe pos is  " + _pos);
+        }
+    }
+    
     #region singleton
-    public static GameManager Instance;
+    public static NetworkManager Instance;
 
     private void Awake()
     {

@@ -32,8 +32,28 @@ public class ClientSend : MonoBehaviour
         {
             using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
             {
-                Debug.Log("my id im sending " + Client.Instance.MyID);
                 _packet.Write(Client.Instance.MyID);
+                _packet.Write(_pos);
+                _packet.Write(_rot);
+                SendUDPData(_packet);
+            }
+        }
+    }
+
+    /// <summary>
+    ///  Sends object movement to the server
+    /// </summary>
+    /// <param name="networkID">network id of the object</param>
+    /// <param name="_pos">Vector3 position</param>
+    /// <param name="_rot">Quat rotation</param>
+    public static void SendGameObjectMovedValues(int networkID,Vector3 _pos, Quaternion _rot)
+    {
+        if (Client.Instance && Client.Instance.isConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.objectMovement)) 
+            {
+                _packet.Write(Client.Instance.MyID); // players id 
+                _packet.Write(networkID); // objects id
                 _packet.Write(_pos);
                 _packet.Write(_rot);
                 SendUDPData(_packet);
