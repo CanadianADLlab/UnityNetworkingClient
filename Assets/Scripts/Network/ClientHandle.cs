@@ -46,6 +46,12 @@ public class ClientHandle : MonoBehaviour
         NetworkManager.Instance.MoveObject(_id, _objectNetID, _pos, _rot);
     }
 
+    public static void RemovePlayer(Packet _packet)
+    {
+        int _id = _packet.ReadInt(); // player who is removed
+        NetworkManager.Instance.RemovePlayer(_id);
+    }
+
 
 
 

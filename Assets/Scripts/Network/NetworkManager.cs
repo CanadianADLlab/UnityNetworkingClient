@@ -29,28 +29,41 @@ public class NetworkManager : MonoBehaviour
         Players.Add(_id, _player.GetComponent<PlayerManager>());
 
     }
-
+    void OnApplicationQuit()
+    {
+        Debug.Log("Disconnecting " + Client.Instance.MyID);
+        ClientSend.SendDisconnect(); // Tell the server we bailing
+    }
 
     public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot)
     {
-        Debug.Log("Moving player with the id of " + _id);
         if (_id != Client.Instance.MyID)
         {
             Players[_id].transform.position = _pos;
             Players[_id].transform.rotation = _rot;
-            Debug.Log("Moving player " + _id + " THe pos is  " + _pos);
         }
     }
     public void MoveObject(int _id,int _objectNetID, Vector3 _pos, Quaternion _rot)
     {
-        Debug.Log("Moving player with the id of " + _id);
         if (_id != Client.Instance.MyID)
         {
             TrackedObjects[_objectNetID].SetPositionAndRot(_pos,_rot);
-            Debug.Log("Moving player " + _id + " THe pos is  " + _pos);
         }
     }
-    
+
+    public void RemovePlayer(int _id) // removes player from game
+    {
+        if (_id != Client.Instance.MyID)
+        {
+            GameObject playerObj = Players[_id].gameObject; // we will MURDER THE PLAYER
+            Players.Remove(_id);
+            GameObject.Destroy(playerObj);
+
+            Debug.Log("Player with id of " + _id + " Has disconnected");
+        }
+
+    }
+
     #region singleton
     public static NetworkManager Instance;
 

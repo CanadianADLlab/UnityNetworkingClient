@@ -40,6 +40,18 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void SendDisconnect() // removes player from the server
+    {
+        if (Client.Instance && Client.Instance.isConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.playerDisconnect))
+            {
+                _packet.Write(Client.Instance.MyID);
+                SendTCPData(_packet); // it should be tcp because we don't wanna lose this
+            }
+        }
+    }
+
     /// <summary>
     ///  Sends object movement to the server
     /// </summary>
