@@ -17,6 +17,23 @@ public class ClientHandle : MonoBehaviour
     }
 
 
+    public static void RoomCreatedSuccess(Packet _packet)
+    {
+        Debug.Log("Room was created with no issues!");
+    }
+    public static void RoomsReceived(Packet _packet)
+    {
+        int _roomID = _packet.ReadInt();
+        string _roomName = _packet.ReadString();
+        int _roomSize = _packet.ReadInt();
+        int _spacesOccupiedInRoom = _packet.ReadInt();
+
+        Debug.Log("Room callback recevied here " + _roomName);
+
+
+    }
+
+
     public static void SpawnPlayer(Packet _packet)
     {
         int _id = _packet.ReadInt();

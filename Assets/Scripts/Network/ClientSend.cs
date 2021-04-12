@@ -25,6 +25,20 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
+    public static void CreateRoom(string roomName)
+    {
+        if (Client.Instance && Client.Instance.isConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.createRoom))
+            {
+                _packet.Write(Client.Instance.MyID);
+                _packet.Write(roomName);
+                SendUDPData(_packet);
+            }
+        }
+    }
+
+
 
     public static void SendPlayerValues(Vector3 _pos, Quaternion _rot)
     {

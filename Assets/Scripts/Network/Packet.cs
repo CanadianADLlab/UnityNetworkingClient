@@ -12,7 +12,9 @@ public enum ServerPackets
     playerMovement,
     objectMovement,
 
-    playerDisconnect
+    playerDisconnect,
+    sendRooms,
+    roomCreated
 
 }
 
@@ -22,8 +24,10 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     objectMovement,
-    playerDisconnect
+    playerDisconnect,
+    createRoom
 }
+
 
 
 public class Packet : IDisposable
