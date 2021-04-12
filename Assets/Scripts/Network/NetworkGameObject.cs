@@ -11,6 +11,8 @@ public class NetworkGameObject : MonoBehaviour
     public int NetworkID = 0;
 
     private Vector3 lastFramePosition = Vector3.zero;
+    private Quaternion lastframeRotation = Quaternion.identity;
+    private bool lerping = false; // true when the server is moving the object
 
     private void Awake()
     {
@@ -27,20 +29,47 @@ public class NetworkGameObject : MonoBehaviour
         NetworkManager.TrackedObjects.Add(NetworkID, this); // adding this object to the list of tracked objects
 
         lastFramePosition = transform.position;
+        lastframeRotation = transform.rotation;
     }
 
     public void SetPositionAndRot(Vector3 _pos,Quaternion _rot)
     {
+        lerping = true;
+        StopCoroutine(LerpToPosAndRot(_pos,_rot)); 
+        StartCoroutine(LerpToPosAndRot(_pos,_rot));
+    }
+
+    private IEnumerator LerpToPosAndRot(Vector3 _pos, Quaternion _rot)
+    {
+        float time = 0;
+        float duration = .05f;
+     
+        Vector3 startPosition = transform.position;
+        Quaternion startRotation = transform.rotation;
+        lastFramePosition = startPosition;
+        lastframeRotation = startRotation;
+        while (time < duration)
+        {
+            transform.rotation = Quaternion.Lerp(startRotation, _rot, time / duration);
+            transform.position = Vector3.Lerp(startPosition, _pos, time / duration);
+            lastFramePosition = transform.position;
+            lastframeRotation = transform.rotation;
+            time += Time.deltaTime;
+            yield return null;
+        }
         transform.position = _pos;
         transform.rotation = _rot;
-        lastFramePosition = transform.position;
+        lastFramePosition = _pos;
+        lastframeRotation = _rot;
+        lerping = false;
     }
     public void FixedUpdate()
     {
-        if (lastFramePosition != transform.position)
+        if ((lastFramePosition != transform.position  || lastframeRotation != transform.rotation) && !lerping)
         {
             ClientSend.SendGameObjectMovedValues(NetworkID, transform.position, transform.rotation);
         }
         lastFramePosition = transform.position;
+        lastframeRotation = transform.rotation;
     }
 }

@@ -39,8 +39,7 @@ public class NetworkManager : MonoBehaviour
     {
         if (_id != Client.Instance.MyID)
         {
-            Players[_id].transform.position = _pos;
-            Players[_id].transform.rotation = _rot;
+            Players[_id].SetPositionAndRot(_pos, _rot);
         }
     }
     public void MoveObject(int _id,int _objectNetID, Vector3 _pos, Quaternion _rot)
