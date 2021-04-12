@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     {   
         StartMenu.SetActive(false);
         UserNameField.interactable = false;
+        Client.Instance.Name = UserNameField.text;
         Client.Instance.ConnectToServer();
         CreateJoinRoomCanvas.SetActive(true);
     }

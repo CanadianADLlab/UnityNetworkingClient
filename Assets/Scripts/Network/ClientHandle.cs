@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClientHandle : MonoBehaviour
 {
+    public static string levelName = "Main";
     public static void Welcome(Packet _packet)
     {
         string _msg = _packet.ReadString();
@@ -19,7 +21,12 @@ public class ClientHandle : MonoBehaviour
 
     public static void RoomCreatedSuccess(Packet _packet)
     {
-        Debug.Log("Room was created with no issues!");
+     
+        int _myId = _packet.ReadInt();
+        int _roomID = _packet.ReadInt();
+        Client.Instance.RoomID = _roomID;
+        Debug.Log("Room was created with no issues! " + _roomID);
+        SceneManager.LoadScene(levelName);
     }
     public static void RoomsReceived(Packet _packet)
     {

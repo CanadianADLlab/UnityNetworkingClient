@@ -13,7 +13,9 @@ public class Client : MonoBehaviour
     public int Port = 90;
     public int MyID;
     public bool isConnected = false;
-     
+
+    public string Name; // name set from the ui
+    public int RoomID = -99; // room id the client is in (only gets set when level is loaded)
     [HideInInspector]
     public TCP Tcp;
 
@@ -247,7 +249,8 @@ public class Client : MonoBehaviour
         {
             Debug.LogError("Client script already exist destorying the one attatched to " + transform.name);
             Destroy(this);
-        } 
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     #endregion

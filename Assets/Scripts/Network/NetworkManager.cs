@@ -27,7 +27,6 @@ public class NetworkManager : MonoBehaviour
         _player.GetComponent<PlayerManager>().UserName = _username;
 
         Players.Add(_id, _player.GetComponent<PlayerManager>());
-
     }
     void OnApplicationQuit()
     {

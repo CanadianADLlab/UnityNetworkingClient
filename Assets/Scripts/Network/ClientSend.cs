@@ -38,7 +38,19 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-
+    public static void SendLevelLoaded()
+    {
+        if (Client.Instance && Client.Instance.isConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.levelLoaded))
+            {
+                _packet.Write(Client.Instance.MyID);
+                _packet.Write(Client.Instance.Name) ;
+                _packet.Write(Client.Instance.RoomID);
+                SendTCPData(_packet);
+            }
+        }
+    }
 
     public static void SendPlayerValues(Vector3 _pos, Quaternion _rot)
     {
@@ -47,6 +59,7 @@ public class ClientSend : MonoBehaviour
             using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
             {
                 _packet.Write(Client.Instance.MyID);
+                _packet.Write(Client.Instance.RoomID);
                 _packet.Write(_pos);
                 _packet.Write(_rot);
                 SendUDPData(_packet);
@@ -61,6 +74,8 @@ public class ClientSend : MonoBehaviour
             using (Packet _packet = new Packet((int)ClientPackets.playerDisconnect))
             {
                 _packet.Write(Client.Instance.MyID);
+                _packet.Write(Client.Instance.RoomID);
+                print(Client.Instance.RoomID);
                 SendTCPData(_packet); // it should be tcp because we don't wanna lose this
             }
         }
@@ -79,6 +94,7 @@ public class ClientSend : MonoBehaviour
             using (Packet _packet = new Packet((int)ClientPackets.objectMovement)) 
             {
                 _packet.Write(Client.Instance.MyID); // players id 
+                _packet.Write(Client.Instance.RoomID);
                 _packet.Write(networkID); // objects id
                 _packet.Write(_pos);
                 _packet.Write(_rot);

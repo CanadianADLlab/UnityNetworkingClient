@@ -25,7 +25,8 @@ public enum ClientPackets
     playerMovement,
     objectMovement,
     playerDisconnect,
-    createRoom
+    createRoom,
+    levelLoaded
 }
 
 
