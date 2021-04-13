@@ -35,9 +35,7 @@ public class ClientHandle : MonoBehaviour
         int _roomSize = _packet.ReadInt();
         int _spacesOccupiedInRoom = _packet.ReadInt();
 
-        Debug.Log("Room callback recevied here " + _roomName);
-
-
+        UIManager.Instance.AddRoomToDropDown(_roomID,_roomName,_roomSize,_spacesOccupiedInRoom);
     }
 
 
