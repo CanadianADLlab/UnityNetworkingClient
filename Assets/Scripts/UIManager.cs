@@ -14,31 +14,57 @@ public class UIManager : MonoBehaviour
     public GameObject CreateJoinRoomCanvas;
 
     public InputField RoomNameInputField;
+    public InputField RoomSizeInputField;
     public Text ErrorText;
 
     public Dropdown RoomsDropdown;
     public Dictionary<string, int> Rooms = new Dictionary<string, int>(); //Normally it would be int,string but because the roomname is what gets selected when the dropdown is clicked we do it backwards :)
 
+    public int MaxRoomSize = 50;
     public int RoomToJoinID = -99;
 
 
     public void CreateRoom()
     {
         string roomName = RoomNameInputField.text;
+        int roomSize;
 
-        if(String.IsNullOrEmpty(roomName))
+        try
+        {
+            roomSize = int.Parse(RoomSizeInputField.text);
+        }
+        catch
+        {
+            ErrorText.text = "Please a valid amount of users";
+            return;
+        }
+
+        if (String.IsNullOrEmpty(roomName))
         {
             ErrorText.text = "Please enter a room name";
         }
+        else if(roomSize > MaxRoomSize)
+        {
+            ErrorText.text = "Please enter a room size less than  " + MaxRoomSize;
+        }
         else
         {
-            ClientSend.CreateRoom(roomName);
+            ClientSend.CreateRoom(roomName,roomSize);
         }
     }
 
-
-    public void JoinServer()
+    public void Refresh()
     {
+        if (Client.Instance.isConnected)
+        {
+            RoomsDropdown.options.Clear();
+            ClientSend.GetRooms();
+        }
+    }
+
+    public void JoinRoom()
+    {
+
         if(RoomToJoinID == -99) // default value is -99 because why not
         {
             ErrorText.text = "Please Select a room";
@@ -46,6 +72,8 @@ public class UIManager : MonoBehaviour
         else
         {
             Debug.Log("Selected room is ! " + RoomToJoinID);
+            ClientSend.JoinRoom(RoomToJoinID);
+
         }
     }
 

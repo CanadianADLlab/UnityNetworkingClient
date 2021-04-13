@@ -232,7 +232,9 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.objectMovement,ClientHandle.MoveObject},
             {(int)ServerPackets.playerDisconnect,ClientHandle.RemovePlayer},
             {(int)ServerPackets.roomCreated,ClientHandle.RoomCreatedSuccess},
-            {(int)ServerPackets.sendRooms,ClientHandle.RoomsReceived }
+            {(int)ServerPackets.sendRooms,ClientHandle.RoomsReceived},
+            {(int)ServerPackets.roomJoined,ClientHandle.RoomJoined },
+            {(int)ServerPackets.roomJoinFailed,ClientHandle.RoomJoinedFailed },
         };
         Debug.Log("Client data inited");
     }

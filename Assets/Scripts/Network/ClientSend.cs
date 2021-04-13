@@ -25,7 +25,19 @@ public class ClientSend : MonoBehaviour
             SendTCPData(_packet);
         }
     }
-    public static void CreateRoom(string roomName)
+
+    public static void GetRooms()
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.getRooms))
+        {
+            _packet.Write(Client.Instance.MyID);
+            _packet.Write(UIManager.Instance.UserNameField.text);
+            Client.Instance.isConnected = true; // receives response from the server so we connected
+            SendTCPData(_packet);
+        }
+    }
+    
+    public static void CreateRoom(string roomName,int roomSize)
     {
         if (Client.Instance && Client.Instance.isConnected)
         {
@@ -33,6 +45,20 @@ public class ClientSend : MonoBehaviour
             {
                 _packet.Write(Client.Instance.MyID);
                 _packet.Write(roomName);
+                _packet.Write(roomSize);
+                SendUDPData(_packet);
+            }
+        }
+    }
+
+    public static void JoinRoom(int _roomID)
+    {
+        if (Client.Instance && Client.Instance.isConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.joinRoom))
+            {
+                _packet.Write(Client.Instance.MyID);
+                _packet.Write(_roomID);
                 SendUDPData(_packet);
             }
         }

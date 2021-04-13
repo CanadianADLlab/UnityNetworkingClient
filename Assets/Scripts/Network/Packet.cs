@@ -14,7 +14,9 @@ public enum ServerPackets
 
     playerDisconnect,
     sendRooms,
-    roomCreated
+    roomCreated,
+    roomJoined,
+    roomJoinFailed
 
 }
 
@@ -26,8 +28,11 @@ public enum ClientPackets
     objectMovement,
     playerDisconnect,
     createRoom,
-    levelLoaded
+    levelLoaded,
+    joinRoom,
+    getRooms
 }
+
 
 
 

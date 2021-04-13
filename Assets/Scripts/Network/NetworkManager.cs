@@ -36,14 +36,14 @@ public class NetworkManager : MonoBehaviour
 
     public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot)
     {
-        if (_id != Client.Instance.MyID)
+        if (_id != Client.Instance.MyID && Players.ContainsKey(_id))
         {
             Players[_id].SetPositionAndRot(_pos, _rot);
         }
     }
     public void MoveObject(int _id,int _objectNetID, Vector3 _pos, Quaternion _rot)
     {
-        if (_id != Client.Instance.MyID)
+        if (_id != Client.Instance.MyID && Players.ContainsKey(_id))
         {
             TrackedObjects[_objectNetID].SetPositionAndRot(_pos,_rot);
         }

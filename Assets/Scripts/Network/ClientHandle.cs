@@ -28,6 +28,23 @@ public class ClientHandle : MonoBehaviour
         Debug.Log("Room was created with no issues! " + _roomID);
         SceneManager.LoadScene(levelName);
     }
+    public static void RoomJoined(Packet _packet)
+    {
+        int _myId = _packet.ReadInt();
+        int _roomID = _packet.ReadInt();
+        Client.Instance.RoomID = _roomID;
+        Debug.Log("Room was created with no issues! " + _roomID);
+        SceneManager.LoadScene(levelName);
+    }
+
+    public static void RoomJoinedFailed(Packet _packet)
+    {
+        int _myId = _packet.ReadInt();
+        int _roomID = _packet.ReadInt();
+        string message = _packet.ReadString();
+        UIManager.Instance.ErrorText.text = message;
+        Debug.Log("Room failed to join");
+    }
     public static void RoomsReceived(Packet _packet)
     {
         int _roomID = _packet.ReadInt();
