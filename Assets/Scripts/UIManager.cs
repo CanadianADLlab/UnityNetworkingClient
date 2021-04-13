@@ -43,13 +43,13 @@ public class UIManager : MonoBehaviour
         {
             ErrorText.text = "Please enter a room name";
         }
-        else if(roomSize > MaxRoomSize)
+        else if (roomSize > MaxRoomSize)
         {
             ErrorText.text = "Please enter a room size less than  " + MaxRoomSize;
         }
         else
         {
-            ClientSend.CreateRoom(roomName,roomSize);
+            ClientSend.CreateRoom(roomName, roomSize);
         }
     }
 
@@ -57,15 +57,17 @@ public class UIManager : MonoBehaviour
     {
         if (Client.Instance.isConnected)
         {
+            // re init the room list before we fetch more to avoid dups
             RoomsDropdown.options.Clear();
+            Rooms = new Dictionary<string, int>(); 
+
             ClientSend.GetRooms();
         }
     }
 
     public void JoinRoom()
     {
-
-        if(RoomToJoinID == -99) // default value is -99 because why not
+        if (RoomToJoinID == -99) // default value is -99 because why not
         {
             ErrorText.text = "Please Select a room";
         }
@@ -73,7 +75,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("Selected room is ! " + RoomToJoinID);
             ClientSend.JoinRoom(RoomToJoinID);
-
         }
     }
 
@@ -82,23 +83,26 @@ public class UIManager : MonoBehaviour
         RoomToJoinID = Rooms[RoomsDropdown.options[RoomsDropdown.value].text];
     }
 
-    public void AddRoomToDropDown(int _roomID,string _roomName,int _roomSize,int _roomSpacesOccupied)
+    public void AddRoomToDropDown(int _roomID, string _roomName, int _roomSize, int _roomSpacesOccupied)
     {
-        var optionData = new Dropdown.OptionData(_roomName);
-        Rooms.Add(_roomName, _roomID);
+
+        var roomValue = _roomName + " : " + _roomSpacesOccupied + "/" + _roomSize;
+        var optionData = new Dropdown.OptionData(roomValue);
+        Rooms.Add(roomValue, _roomID);
         RoomsDropdown.options.Add(optionData);
         if (RoomsDropdown.options.Count == 1) // first option
         {
             var listAvailableStrings = RoomsDropdown.options.Select(option => option.text).ToList();
-            RoomsDropdown.value = listAvailableStrings.IndexOf(_roomName); ; // setting the first value to be selectedidk why its 1 or why my select thing doesn't work
+            RoomsDropdown.value = listAvailableStrings.IndexOf(roomValue); ; // setting the first value to be selectedidk why its 1 or why my select thing doesn't work
             RoomToJoinID = _roomID;
             Debug.Log("Selecting " + RoomsDropdown.value);
         }
+
     }
 
 
     public void ConnectToServer()
-    {   
+    {
         StartMenu.SetActive(false);
         UserNameField.interactable = false;
         Client.Instance.Name = UserNameField.text;
