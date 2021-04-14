@@ -11,7 +11,7 @@ public class NetworkGameObject : MonoBehaviour
     public int NetworkID = 0;
 
     private Vector3 lastFramePosition = Vector3.zero;
-    private Quaternion lastframeRotation = Quaternion.identity;
+    private Quaternion lastFrameRotation = Quaternion.identity;
     private bool lerping = false; // true when the server is moving the object
 
     private void Awake()
@@ -29,7 +29,7 @@ public class NetworkGameObject : MonoBehaviour
         NetworkManager.TrackedObjects.Add(NetworkID, this); // adding this object to the list of tracked objects
 
         lastFramePosition = transform.position;
-        lastframeRotation = transform.rotation;
+        lastFrameRotation = transform.rotation;
     }
 
     public void SetLocation(Vector3 _pos, Quaternion _rot)
@@ -38,7 +38,7 @@ public class NetworkGameObject : MonoBehaviour
         transform.position = _pos;
         transform.rotation = _rot;
         lastFramePosition = _pos;
-        lastframeRotation = _rot;
+        lastFrameRotation = _rot;
     }
     public void SetPositionAndRot(Vector3 _pos,Quaternion _rot)
     {
@@ -55,29 +55,29 @@ public class NetworkGameObject : MonoBehaviour
         Vector3 startPosition = transform.position;
         Quaternion startRotation = transform.rotation;
         lastFramePosition = startPosition;
-        lastframeRotation = startRotation;
+        lastFrameRotation = startRotation;
         while (time < duration)
         {
             transform.rotation = Quaternion.Lerp(startRotation, _rot, time / duration);
             transform.position = Vector3.Lerp(startPosition, _pos, time / duration);
             lastFramePosition = transform.position;
-            lastframeRotation = transform.rotation;
+            lastFrameRotation = transform.rotation;
             time += Time.deltaTime;
             yield return null;
         }
         transform.position = _pos;
         transform.rotation = _rot;
         lastFramePosition = _pos;
-        lastframeRotation = _rot;
+        lastFrameRotation = _rot;
         lerping = false;
     }
     public void FixedUpdate()
     {
-        if ((lastFramePosition != transform.position  || lastframeRotation != transform.rotation) && !lerping)
+        if ((lastFramePosition != transform.position  || lastFrameRotation != transform.rotation) && !lerping)
         {
             ClientSend.SendGameObjectMovedValues(NetworkID, transform.position, transform.rotation);
         }
         lastFramePosition = transform.position;
-        lastframeRotation = transform.rotation;
+        lastFrameRotation = transform.rotation;
     }
 }

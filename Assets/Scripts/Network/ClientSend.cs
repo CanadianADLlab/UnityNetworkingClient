@@ -78,7 +78,7 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void SendPlayerValues(Vector3 _pos, Quaternion _rot)
+    public static void SendPlayerValues(Vector3 _pos, Quaternion _rot, bool lerp = true)
     {
         if (Client.Instance && Client.Instance.IsConnected)
         {
@@ -88,6 +88,7 @@ public class ClientSend : MonoBehaviour
                 _packet.Write(Client.Instance.RoomID);
                 _packet.Write(_pos);
                 _packet.Write(_rot);
+                _packet.Write(lerp);
                 SendUDPData(_packet);
             }
         }

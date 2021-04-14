@@ -7,9 +7,17 @@ public class PlayerManager : MonoBehaviour
     public  int ID { get; set; } 
     public  string UserName { get; set; }
 
-    public void SetPositionAndRot(Vector3 _pos, Quaternion _rot)
+    public void SetPositionAndRot(Vector3 _pos, Quaternion _rot,bool _lerp)
     {
-        StartCoroutine(LerpToPosAndRot(_pos, _rot));
+        if (_lerp)
+        {
+            StartCoroutine(LerpToPosAndRot(_pos, _rot));
+        }
+        else
+        {
+            transform.position = _pos;
+            transform.rotation = _rot;
+        }
     }
     private IEnumerator LerpToPosAndRot(Vector3 _pos, Quaternion _rot)
     {

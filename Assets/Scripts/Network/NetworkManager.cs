@@ -30,6 +30,11 @@ public class NetworkManager : MonoBehaviour
         _player.GetComponent<PlayerManager>().UserName = _username;
 
         Players.Add(_id, _player.GetComponent<PlayerManager>());
+
+        if (Players.ContainsKey(Client.Instance.MyID)) // if I'm the new player there is a chance my id is not set so let's just double check 
+        {
+            ClientSend.SendPlayerValues(Players[Client.Instance.MyID].transform.position, Players[Client.Instance.MyID].transform.rotation, false); // Send my position value so the new player knows where we are (movement only happens when i move) and lerping is set to false so it just moves the player there
+        }
     }
     void OnApplicationQuit()
     {
@@ -37,18 +42,18 @@ public class NetworkManager : MonoBehaviour
         ClientSend.SendDisconnect(); // Tell the server we bailing
     }
 
-    public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot)
+    public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot, bool _lerp)
     {
         if (_id != Client.Instance.MyID && Players.ContainsKey(_id))
         {
-            Players[_id].SetPositionAndRot(_pos, _rot);
+            Players[_id].SetPositionAndRot(_pos, _rot, _lerp);
         }
     }
-    public void MoveObject(int _id,int _objectNetID, Vector3 _pos, Quaternion _rot)
+    public void MoveObject(int _id, int _objectNetID, Vector3 _pos, Quaternion _rot)
     {
         if (_id != Client.Instance.MyID && Players.ContainsKey(_id))
         {
-            TrackedObjects[_objectNetID].SetPositionAndRot(_pos,_rot);
+            TrackedObjects[_objectNetID].SetPositionAndRot(_pos, _rot);
         }
     }
 
@@ -62,9 +67,9 @@ public class NetworkManager : MonoBehaviour
     }
     public void UpdateAllNetworkObjectPositions(int _clientID)
     {
-        foreach(var trackedObject in TrackedObjects.Values)
+        foreach (var trackedObject in TrackedObjects.Values)
         {
-            ClientSend.SetObjectPosition(_clientID, trackedObject.NetworkID,trackedObject.transform.position,trackedObject.transform.rotation);
+            ClientSend.SetObjectPosition(_clientID, trackedObject.NetworkID, trackedObject.transform.position, trackedObject.transform.rotation);
         }
     }
 

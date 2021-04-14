@@ -75,8 +75,9 @@ public class ClientHandle : MonoBehaviour
         int _id = _packet.ReadInt();
         Vector3 _pos = _packet.ReadVector3();
         Quaternion _rot = _packet.ReadQuaternion();
+        bool _lerp = _packet.ReadBool();
 
-        NetworkManager.Instance.MovePlayer(_id,_pos,_rot);
+        NetworkManager.Instance.MovePlayer(_id,_pos,_rot, _lerp);
     }
 
     public static void MoveObject(Packet _packet)
