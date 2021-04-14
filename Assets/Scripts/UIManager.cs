@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
 
     public void Refresh()
     {
-        if (Client.Instance.isConnected)
+        if (Client.Instance.IsConnected)
         {
             // re init the room list before we fetch more to avoid dups
             RoomsDropdown.options.Clear();

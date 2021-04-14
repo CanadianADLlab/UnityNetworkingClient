@@ -16,7 +16,9 @@ public enum ServerPackets
     sendRooms,
     roomCreated,
     roomJoined,
-    roomJoinFailed
+    roomJoinFailed,
+    setObjectLocation,
+    newHostSelected
 
 }
 
@@ -30,7 +32,8 @@ public enum ClientPackets
     createRoom,
     levelLoaded,
     joinRoom,
-    getRooms
+    getRooms,
+    objectLocationSet
 }
 
 

@@ -12,7 +12,8 @@ public class Client : MonoBehaviour
 
     public int Port = 90;
     public int MyID;
-    public bool isConnected = false;
+    public bool IsConnected = false;
+    public bool IsHost = false; // theres not actually a host but I guess the host is like the owner of the room
 
     public string Name; // name set from the ui
     public int RoomID = -99; // room id the client is in (only gets set when level is loaded)
@@ -235,6 +236,8 @@ public class Client : MonoBehaviour
             {(int)ServerPackets.sendRooms,ClientHandle.RoomsReceived},
             {(int)ServerPackets.roomJoined,ClientHandle.RoomJoined },
             {(int)ServerPackets.roomJoinFailed,ClientHandle.RoomJoinedFailed },
+            {(int)ServerPackets.setObjectLocation,ClientHandle.SetObjectLocation },
+            {(int)ServerPackets.newHostSelected,ClientHandle.SetHost }
         };
         Debug.Log("Client data inited");
     }

@@ -21,12 +21,16 @@ public class ClientHandle : MonoBehaviour
 
     public static void RoomCreatedSuccess(Packet _packet)
     {
-     
         int _myId = _packet.ReadInt();
         int _roomID = _packet.ReadInt();
         Client.Instance.RoomID = _roomID;
         Debug.Log("Room was created with no issues! " + _roomID);
         SceneManager.LoadScene(levelName);
+    }
+    public static void SetHost(Packet _packet)
+    {
+        Debug.Log("I am zee host");
+        Client.Instance.IsHost = true;
     }
     public static void RoomJoined(Packet _packet)
     {
@@ -85,6 +89,15 @@ public class ClientHandle : MonoBehaviour
         NetworkManager.Instance.MoveObject(_id, _objectNetID, _pos, _rot);
     }
 
+    public static void SetObjectLocation(Packet _packet)
+    {
+        int _id = _packet.ReadInt(); // player who sent id 
+        int _objectNetID = _packet.ReadInt(); // net id
+        Vector3 _pos = _packet.ReadVector3();
+        Quaternion _rot = _packet.ReadQuaternion();
+
+        NetworkManager.Instance.SetObjectLocation(_id, _objectNetID, _pos, _rot);
+    }
     public static void RemovePlayer(Packet _packet)
     {
         int _id = _packet.ReadInt(); // player who is removed

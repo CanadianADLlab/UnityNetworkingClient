@@ -32,6 +32,14 @@ public class NetworkGameObject : MonoBehaviour
         lastframeRotation = transform.rotation;
     }
 
+    public void SetLocation(Vector3 _pos, Quaternion _rot)
+    {
+        Debug.Log("Setting location in the method call");
+        transform.position = _pos;
+        transform.rotation = _rot;
+        lastFramePosition = _pos;
+        lastframeRotation = _rot;
+    }
     public void SetPositionAndRot(Vector3 _pos,Quaternion _rot)
     {
         lerping = true;

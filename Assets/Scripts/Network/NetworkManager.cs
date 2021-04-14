@@ -21,8 +21,11 @@ public class NetworkManager : MonoBehaviour
         {
             _player = GameObject.Instantiate(PlayerPrefab, _position, _rotation);
         }
+        if (Client.Instance.IsHost)
+        {
+            UpdateAllNetworkObjectPositions(_id);
+        }
         _player.transform.name = _username + ":ID:" + _id;
-
         _player.GetComponent<PlayerManager>().ID = _id;
         _player.GetComponent<PlayerManager>().UserName = _username;
 
@@ -49,6 +52,22 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    public void SetObjectLocation(int _id, int _objectNetID, Vector3 _pos, Quaternion _rot)
+    {
+        Debug.Log("Being told to move this fella");
+        if (TrackedObjects.ContainsKey(_objectNetID))
+        {
+            TrackedObjects[_objectNetID].SetLocation(_pos, _rot);
+        }
+    }
+    public void UpdateAllNetworkObjectPositions(int _clientID)
+    {
+        foreach(var trackedObject in TrackedObjects.Values)
+        {
+            ClientSend.SetObjectPosition(_clientID, trackedObject.NetworkID,trackedObject.transform.position,trackedObject.transform.rotation);
+        }
+    }
+
     public void RemovePlayer(int _id) // removes player from game
     {
         if (_id != Client.Instance.MyID)
@@ -57,6 +76,10 @@ public class NetworkManager : MonoBehaviour
             Players.Remove(_id);
             GameObject.Destroy(playerObj);
 
+            if (Players.Count == 1)
+            {
+                Client.Instance.IsHost = true; // we the first peeps so host
+            }
             Debug.Log("Player with id of " + _id + " Has disconnected");
         }
 

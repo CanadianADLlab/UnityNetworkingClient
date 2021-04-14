@@ -21,7 +21,7 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(Client.Instance.MyID);
             _packet.Write(UIManager.Instance.UserNameField.text);
-            Client.Instance.isConnected = true; // receives response from the server so we connected
+            Client.Instance.IsConnected = true; // receives response from the server so we connected
             SendTCPData(_packet);
         }
     }
@@ -32,14 +32,14 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(Client.Instance.MyID);
             _packet.Write(UIManager.Instance.UserNameField.text);
-            Client.Instance.isConnected = true; // receives response from the server so we connected
+            Client.Instance.IsConnected = true; // receives response from the server so we connected
             SendTCPData(_packet);
         }
     }
     
     public static void CreateRoom(string roomName,int roomSize)
     {
-        if (Client.Instance && Client.Instance.isConnected)
+        if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.createRoom))
             {
@@ -53,7 +53,7 @@ public class ClientSend : MonoBehaviour
 
     public static void JoinRoom(int _roomID)
     {
-        if (Client.Instance && Client.Instance.isConnected)
+        if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.joinRoom))
             {
@@ -66,7 +66,7 @@ public class ClientSend : MonoBehaviour
 
     public static void SendLevelLoaded()
     {
-        if (Client.Instance && Client.Instance.isConnected)
+        if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.levelLoaded))
             {
@@ -80,7 +80,7 @@ public class ClientSend : MonoBehaviour
 
     public static void SendPlayerValues(Vector3 _pos, Quaternion _rot)
     {
-        if (Client.Instance && Client.Instance.isConnected)
+        if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
             {
@@ -95,7 +95,7 @@ public class ClientSend : MonoBehaviour
 
     public static void SendDisconnect() // removes player from the server
     {
-        if (Client.Instance && Client.Instance.isConnected)
+        if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.playerDisconnect))
             {
@@ -106,7 +106,7 @@ public class ClientSend : MonoBehaviour
             }
         }
     }
-
+ 
     /// <summary>
     ///  Sends object movement to the server
     /// </summary>
@@ -115,7 +115,7 @@ public class ClientSend : MonoBehaviour
     /// <param name="_rot">Quat rotation</param>
     public static void SendGameObjectMovedValues(int networkID,Vector3 _pos, Quaternion _rot)
     {
-        if (Client.Instance && Client.Instance.isConnected)
+        if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.objectMovement)) 
             {
@@ -128,5 +128,22 @@ public class ClientSend : MonoBehaviour
             }
         }
     }
+
+    public static void SetObjectPosition(int _clientID,int networkID, Vector3 _pos, Quaternion _rot) // behaves simular to the objectmoved but forces a position with no lerp
+    {
+        print("Sending object positions");
+        if (Client.Instance && Client.Instance.IsConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.objectLocationSet))
+            {
+                _packet.Write(_clientID); // players id 
+                _packet.Write(Client.Instance.RoomID);
+                _packet.Write(networkID); // objects id
+                _packet.Write(_pos);
+                _packet.Write(_rot);
+                SendUDPData(_packet);
+            }
+        }
+    }    
 
 }
