@@ -14,6 +14,9 @@ public class NetworkGameObject : MonoBehaviour
     private Quaternion lastFrameRotation = Quaternion.identity;
     private bool lerping = false; // true when the server is moving the object
 
+    private Rigidbody rb;
+    private bool startingIsKinematicValue = false;
+
     private void Awake()
     {
         foreach(var netWorkObject in GameObject.FindObjectsOfType<NetworkGameObject>())
@@ -25,6 +28,12 @@ public class NetworkGameObject : MonoBehaviour
             }
         }
 
+        rb = GetComponent<Rigidbody>();
+        if (rb) // set to kinematic at start and wait for the server to tell us we can use physics (object starts falling causes allooot of issues with who moves what)
+        {
+            startingIsKinematicValue = rb.isKinematic; // use a var for setting back to not kinematic because maybe for some reason theres a rigidbody with this set to true at start
+            rb.isKinematic = true; 
+        }
         // Register object with gamemanager
         NetworkManager.TrackedObjects.Add(NetworkID, this); // adding this object to the list of tracked objects
 
@@ -35,10 +44,19 @@ public class NetworkGameObject : MonoBehaviour
     public void SetLocation(Vector3 _pos, Quaternion _rot)
     {
         Debug.Log("Setting location in the method call");
+        if (rb) // object has rigidbody
+        {
+            rb.isKinematic = true; // set it like this so gravity doesn't interfere
+        }
         transform.position = _pos;
         transform.rotation = _rot;
         lastFramePosition = _pos;
         lastFrameRotation = _rot;
+
+        if (rb) // object has rigidbody
+        {
+            rb.isKinematic = startingIsKinematicValue; // set it like this so gravity doesn't interfere
+        }
     }
     public void SetPositionAndRot(Vector3 _pos,Quaternion _rot)
     {
@@ -49,6 +67,10 @@ public class NetworkGameObject : MonoBehaviour
 
     private IEnumerator LerpToPosAndRot(Vector3 _pos, Quaternion _rot)
     {
+        if (rb) // object has rigidbody
+        {
+            rb.isKinematic = true; // set it like this so gravity doesn't interfere
+        }
         float time = 0;
         float duration = .05f;
      
@@ -69,7 +91,11 @@ public class NetworkGameObject : MonoBehaviour
         transform.rotation = _rot;
         lastFramePosition = _pos;
         lastFrameRotation = _rot;
-        lerping = false;
+        lerping = false; 
+        if (rb) // object has rigidbody
+        {
+            rb.isKinematic = startingIsKinematicValue; // set it like this so gravity doesn't interfere
+        }
     }
     public void FixedUpdate()
     {
