@@ -10,16 +10,35 @@ public class NetworkManager : MonoBehaviour
     public GameObject LocalPlayerPrefab;
     public GameObject PlayerPrefab;
 
-    public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation)
+    public GameObject LocalVRPlayerPrefab;
+    public GameObject VRPlayerPrefab;
+
+    public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation, bool _isVR)
     {
         GameObject _player;
-        if (_id == Client.Instance.MyID)
+        Debug.Log("this should be a vr guy is it  " + _isVR);
+        if (!_isVR)
         {
-            _player = GameObject.Instantiate(LocalPlayerPrefab, _position, _rotation);
+            if (_id == Client.Instance.MyID)
+            {
+                _player = GameObject.Instantiate(LocalPlayerPrefab, _position, _rotation);
+            }
+            else
+            {
+                _player = GameObject.Instantiate(PlayerPrefab, _position, _rotation);
+            }
         }
         else
         {
-            _player = GameObject.Instantiate(PlayerPrefab, _position, _rotation);
+            Debug.Log("spawning vr player fagot");
+            if (_id == Client.Instance.MyID)
+            {
+                _player = GameObject.Instantiate(LocalVRPlayerPrefab, _position, _rotation);
+            }
+            else
+            {
+                _player = GameObject.Instantiate(VRPlayerPrefab, _position, _rotation);
+            }
         }
         if (Client.Instance.IsHost)
         {
@@ -33,7 +52,14 @@ public class NetworkManager : MonoBehaviour
 
         if (Players.ContainsKey(Client.Instance.MyID)) // if I'm the new player there is a chance my id is not set so let's just double check 
         {
-            ClientSend.SendPlayerValues(Players[Client.Instance.MyID].transform.position, Players[Client.Instance.MyID].transform.rotation, false); // Send my position value so the new player knows where we are (movement only happens when i move) and lerping is set to false so it just moves the player there
+            if (!Client.Instance.IsVR)
+            {
+                ClientSend.SendPlayerValues(Players[Client.Instance.MyID].transform.position, Players[Client.Instance.MyID].transform.rotation, false); // Send my position value so the new player knows where we are (movement only happens when i move) and lerping is set to false so it just moves the player there
+            }
+            else
+            {
+                ClientSend.SendPlayerValues(Players[Client.Instance.MyID].transform.position, Players[Client.Instance.MyID].transform.rotation, Players[Client.Instance.MyID].LeftHand.position, Players[Client.Instance.MyID].LeftHand.rotation, Players[Client.Instance.MyID].RightHand.position, Players[Client.Instance.MyID].RightHand.rotation, false); // Send my position value so the new player knows where we are (movement only happens when i move) and lerping is set to false so it just moves the player there
+            }
         }
     }
     void OnApplicationQuit()
@@ -47,6 +73,14 @@ public class NetworkManager : MonoBehaviour
         if (_id != Client.Instance.MyID && Players.ContainsKey(_id))
         {
             Players[_id].SetPositionAndRot(_pos, _rot, _lerp);
+        }
+    }
+
+    public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot, Vector3 _leftHandPos, Quaternion _leftHandRot, Vector3 _rightHandPos, Quaternion _rightHandRot, bool _lerp)
+    {
+        if (_id != Client.Instance.MyID && Players.ContainsKey(_id))
+        {
+            Players[_id].SetPositionAndRot(_pos,_rot,_leftHandPos, _leftHandRot, _rightHandPos, _rightHandRot, _lerp);
         }
     }
     public void MoveObject(int _id, int _objectNetID, Vector3 _pos, Quaternion _rot)

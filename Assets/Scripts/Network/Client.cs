@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Client : MonoBehaviour
 {
@@ -38,7 +39,10 @@ public class Client : MonoBehaviour
         InitializeClientData();
         Tcp.Connect();
     }
-
+    public void SetIsVR(Toggle _vrToggle)
+    {
+        IsVR = _vrToggle.isOn;
+    }
     public class TCP
     {
         public TcpClient Socket;

@@ -976,6 +976,7 @@ GameObject:
   - component: {fileID: 7503372587520897682}
   - component: {fileID: 7503372587520897677}
   - component: {fileID: 7503372587520897676}
+  - component: {fileID: 7731433882205432695}
   m_Layer: 15
   m_Name: Camera Offset
   m_TagString: Untagged
@@ -1039,6 +1040,21 @@ MonoBehaviour:
   StickToGroundForce: 2
   VrCamera: {fileID: 7503372588622639798}
   PlayerCollider: {fileID: 7503372588041560116}
+--- !u!114 &7731433882205432695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503372587520897683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2db5cc5503e2834a96255ef976aedde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHand: {fileID: 7503372588465349100}
+  RightHand: {fileID: 7503372588931174443}
+  VRBody: {fileID: 7503372587520897682}
 --- !u!1 &7503372588041560117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1165,7 @@ GameObject:
   - component: {fileID: 6470698590652637741}
   - component: {fileID: 7503372588343174642}
   - component: {fileID: 7503372588343174643}
+  - component: {fileID: -2809126935506347135}
   m_Layer: 15
   m_Name: VRLocalPlayer
   m_TagString: Untagged
@@ -1282,6 +1299,20 @@ MonoBehaviour:
   RightStickUp: 0
   LeftStickAxis: {x: 0, y: 0}
   RightStickAxis: {x: 0, y: 0}
+--- !u!114 &-2809126935506347135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503372588343174644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942dffe329b52d648ae8bbaad6742124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHand: {fileID: 7503372588465349100}
+  RightHand: {fileID: 7503372588931174443}
 --- !u!1 &7503372588465349101
 GameObject:
   m_ObjectHideFlags: 0

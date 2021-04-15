@@ -90,9 +90,38 @@ public class ClientSend : MonoBehaviour
             {
                 _packet.Write(Client.Instance.MyID);
                 _packet.Write(Client.Instance.RoomID);
+
                 _packet.Write(_pos);
                 _packet.Write(_rot);
+
                 _packet.Write(lerp);
+                _packet.Write(Client.Instance.IsVR);
+                SendUDPData(_packet);
+            }
+        }
+    }
+
+    public static void SendPlayerValues(Vector3 _pos, Quaternion _rot, Vector3 _leftHandPos, Quaternion _leftHandRot, Vector3 _rightHandPos, Quaternion _rightHandRot, bool lerp = true)
+    {
+        if (Client.Instance && Client.Instance.IsConnected)
+        {
+            using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
+            {
+                _packet.Write(Client.Instance.MyID);
+                _packet.Write(Client.Instance.RoomID);
+
+                _packet.Write(_pos);
+                _packet.Write(_rot);
+
+                _packet.Write(lerp);
+                _packet.Write(Client.Instance.IsVR);
+
+                _packet.Write(_leftHandPos);
+                _packet.Write(_leftHandRot);
+
+                _packet.Write(_rightHandPos);
+                _packet.Write(_rightHandRot);
+
                 SendUDPData(_packet);
             }
         }
@@ -136,7 +165,6 @@ public class ClientSend : MonoBehaviour
 
     public static void SetObjectPosition(int _clientID,int networkID, Vector3 _pos, Quaternion _rot) // behaves simular to the objectmoved but forces a position with no lerp
     {
-        print("Sending object positions");
         if (Client.Instance && Client.Instance.IsConnected)
         {
             using (Packet _packet = new Packet((int)ClientPackets.objectLocationSet))

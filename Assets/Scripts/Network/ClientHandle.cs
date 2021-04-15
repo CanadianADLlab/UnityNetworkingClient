@@ -66,8 +66,9 @@ public class ClientHandle : MonoBehaviour
         string _username = _packet.ReadString();
         Vector3 _pos = _packet.ReadVector3();
         Quaternion _rot = _packet.ReadQuaternion();
+        bool _isVR = _packet.ReadBool();
 
-        NetworkManager.Instance.SpawnPlayer(_id, _username, _pos, _rot);
+        NetworkManager.Instance.SpawnPlayer(_id, _username, _pos, _rot, _isVR);
     }
 
     public static void MovePlayer(Packet _packet)
@@ -76,8 +77,20 @@ public class ClientHandle : MonoBehaviour
         Vector3 _pos = _packet.ReadVector3();
         Quaternion _rot = _packet.ReadQuaternion();
         bool _lerp = _packet.ReadBool();
+        bool _isVR = _packet.ReadBool();
 
-        NetworkManager.Instance.MovePlayer(_id,_pos,_rot, _lerp);
+        if (!_isVR)
+        {
+            NetworkManager.Instance.MovePlayer(_id, _pos, _rot, _lerp);
+        }
+        else
+        {
+            Vector3 _leftHandPos = _packet.ReadVector3();
+            Quaternion _leftHandRot = _packet.ReadQuaternion();
+            Vector3 _rightHandPos = _packet.ReadVector3();
+            Quaternion _rightHandRot = _packet.ReadQuaternion();
+            NetworkManager.Instance.MovePlayer(_id, _pos, _rot, _leftHandPos, _leftHandRot, _rightHandPos, _rightHandRot, _lerp);
+        }
     }
 
     public static void MoveObject(Packet _packet)

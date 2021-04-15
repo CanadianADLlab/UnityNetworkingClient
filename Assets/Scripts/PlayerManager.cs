@@ -7,11 +7,17 @@ public class PlayerManager : MonoBehaviour
     public  int ID { get; set; } 
     public  string UserName { get; set; }
 
+    [Header("Optional VR stuff")]
+    public Transform LeftHand;
+    public Transform RightHand;
+
+
+    // non vr
     public void SetPositionAndRot(Vector3 _pos, Quaternion _rot,bool _lerp)
     {
         if (_lerp)
         {
-            StartCoroutine(LerpToPosAndRot(_pos, _rot));
+            StartCoroutine(LerpToPosAndRot(_pos, _rot,transform));
         }
         else
         {
@@ -19,22 +25,44 @@ public class PlayerManager : MonoBehaviour
             transform.rotation = _rot;
         }
     }
-    private IEnumerator LerpToPosAndRot(Vector3 _pos, Quaternion _rot)
+
+    // vr version 
+    public void SetPositionAndRot(Vector3 _pos, Quaternion _rot, Vector3 _leftHandPos, Quaternion _leftHandRot, Vector3 _rightHandPos, Quaternion _rightHandRot,bool _lerp)
+    {
+        if (_lerp)
+        {
+            StartCoroutine(LerpToPosAndRot(_pos, _rot, transform));
+            StartCoroutine(LerpToPosAndRot(_rightHandPos, _rightHandRot, RightHand));
+            StartCoroutine(LerpToPosAndRot(_leftHandPos, _leftHandRot, LeftHand));
+        }
+        else
+        {
+            transform.position = _pos;
+            transform.rotation = _rot;
+            LeftHand.position = _leftHandPos;
+            LeftHand.rotation = _leftHandRot;
+            RightHand.position = _rightHandPos;
+            RightHand.rotation = _rightHandRot;
+        }
+
+
+    }
+    private IEnumerator LerpToPosAndRot(Vector3 _pos, Quaternion _rot,Transform lerpTransform)
     {
         float time = 0;
         float duration = .1f;
-        Vector3 startPosition = transform.position;
-        Quaternion startRotation = transform.rotation;
+        Vector3 startPosition = lerpTransform.position;
+        Quaternion startRotation = lerpTransform.rotation;
 
         while (time < duration)
         {
-            transform.rotation = Quaternion.Lerp(startRotation, _rot, time / duration);
-            transform.position = Vector3.Lerp(startPosition, _pos, time / duration);
+            lerpTransform.rotation = Quaternion.Lerp(startRotation, _rot, time / duration);
+            lerpTransform.position = Vector3.Lerp(startPosition, _pos, time / duration);
             time += Time.deltaTime;
             yield return null;
         }
-        transform.position = _pos;
-        transform.rotation = _rot;
+        lerpTransform.position = _pos;
+        lerpTransform.rotation = _rot;
         yield return null;
     }
 }
