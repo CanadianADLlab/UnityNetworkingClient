@@ -21,7 +21,7 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(Client.Instance.MyID);
             _packet.Write(UIManager.Instance.UserNameField.text);
-            _packet.Write(UIManager.Instance.UserNameField.text);
+          
             Client.Instance.IsConnected = true; // receives response from the server so we connected
             SendTCPData(_packet);
         }
@@ -47,6 +47,7 @@ public class ClientSend : MonoBehaviour
                 _packet.Write(Client.Instance.MyID);
                 _packet.Write(roomName);
                 _packet.Write(roomSize);
+            
                 SendUDPData(_packet);
             }
         }
@@ -60,6 +61,7 @@ public class ClientSend : MonoBehaviour
             {
                 _packet.Write(Client.Instance.MyID);
                 _packet.Write(_roomID);
+              
                 SendUDPData(_packet);
             }
         }
@@ -74,6 +76,7 @@ public class ClientSend : MonoBehaviour
                 _packet.Write(Client.Instance.MyID);
                 _packet.Write(Client.Instance.Name) ;
                 _packet.Write(Client.Instance.RoomID);
+                _packet.Write(Client.Instance.IsVR);
                 SendTCPData(_packet);
             }
         }
