@@ -21,6 +21,7 @@ public class ClientSend : MonoBehaviour
         {
             _packet.Write(Client.Instance.MyID);
             _packet.Write(UIManager.Instance.UserNameField.text);
+            _packet.Write(UIManager.Instance.UserNameField.text);
             Client.Instance.IsConnected = true; // receives response from the server so we connected
             SendTCPData(_packet);
         }

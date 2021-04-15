@@ -12,6 +12,7 @@ public class Client : MonoBehaviour
 
     public int Port = 90;
     public int MyID;
+    public bool IsVR = false;
     public bool IsConnected = false;
     public bool IsHost = false; // theres not actually a host but I guess the host is like the owner of the room
 

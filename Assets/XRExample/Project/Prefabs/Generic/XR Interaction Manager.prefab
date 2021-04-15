@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6026370397582613516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6026370397582613518}
+  - component: {fileID: 6026370397582613519}
+  - component: {fileID: 6026370397582613553}
+  m_Layer: 0
+  m_Name: XR Interaction Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6026370397582613518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026370397582613516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5794333, y: 1.8931433, z: -2.1107602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6026370397582613519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026370397582613516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6026370397582613553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026370397582613516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b512e523b7aa30643b26c5ddbe0a5b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftTriggerPressed: 0
+  RightTriggerPressed: 0
+  LeftTriggerDown: 0
+  RightTriggerDown: 0
+  LeftTriggerUp: 0
+  RightTriggerUp: 0
+  LeftGripPressed: 0
+  RightGripPressed: 0
+  LeftGripDown: 0
+  RightGripDown: 0
+  LeftGripUp: 0
+  RightGripUp: 0
+  LeftPrimaryButtonPressed: 0
+  RightPrimaryButtonPressed: 0
+  LeftSecondaryButtonPressed: 0
+  RightSecondaryButtonPressed: 0
+  LeftPrimaryButtonDown: 0
+  RightPrimaryButtonDown: 0
+  LeftSecondaryButtonDown: 0
+  RightSecondaryButtonDown: 0
+  LeftPrimaryButtonUp: 0
+  RightPrimaryButtonUp: 0
+  LeftSecondaryButtonUp: 0
+  RightSecondaryButtonUp: 0
+  LeftMenuButtonDown: 0
+  RightMenuButtonDown: 0
+  LeftMenuButtonPressed: 0
+  RightMenuButtonPressed: 0
+  LeftMenuButtonUp: 0
+  RightMenuButtonUp: 0
+  LeftStickDown: 0
+  RightStickDown: 0
+  LeftStickPressed: 0
+  RightStickPressed: 0
+  LeftStickUp: 0
+  RightStickUp: 0
+  LeftStickAxis: {x: 0, y: 0}
+  RightStickAxis: {x: 0, y: 0}
