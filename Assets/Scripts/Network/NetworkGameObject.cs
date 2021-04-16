@@ -43,7 +43,6 @@ public class NetworkGameObject : MonoBehaviour
 
     public void SetLocation(Vector3 _pos, Quaternion _rot)
     {
-        Debug.Log("Setting location in the method call");
         if (rb) // object has rigidbody
         {
             rb.isKinematic = true; // set it like this so gravity doesn't interfere

@@ -32,7 +32,6 @@ public class NetworkCharacter : MonoBehaviour
         {
             if (((lastFramePosition != VRBody.position || lastFrameRotation != VRBody.rotation) || (leftHandLastFramePosition != LeftHand.position || leftHandLastFrameRotation != LeftHand.rotation) || (rightHandLastFramePosition != RightHand.position || rightHandLastFrameRotation != RightHand.rotation)) && !lerping)
             {
-                print("Sending vr values");
                 ClientSend.SendPlayerValues(VRBody.position, VRBody.rotation,LeftHand.position,LeftHand.rotation,RightHand.position,RightHand.rotation);
             }
             leftHandLastFramePosition = LeftHand.position;

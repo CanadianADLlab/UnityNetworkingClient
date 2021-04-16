@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479104}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_index_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479106}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_middle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479108}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_index2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479110}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_index3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479112}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_hand_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479114}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_index1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479116}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479118}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479120}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_pinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479122}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_pinky_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479124}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_pinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479126}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_pinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479128}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_middle_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479130}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_pinky0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479132}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_middle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479134}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_middle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479136}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_thumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479138}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_thumb_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479140}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_thumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479142}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_thumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479144}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_ring3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479146}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_ring_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479148}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_ring1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -721,7 +721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479150}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_r_ring2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2794590713196479160}
   - component: {fileID: 2794590713193010092}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:Rhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2794590713196479162}
   - component: {fileID: 2794590713188740460}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: Right Hand Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -912,7 +912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479164}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:hands_geom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2794590713196479166}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:r_hand_world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1162,10 +1162,10 @@ GameObject:
   - component: {fileID: 7503372588343174641}
   - component: {fileID: 7503372588343174646}
   - component: {fileID: 7503372588343174647}
-  - component: {fileID: 6470698590652637741}
   - component: {fileID: 7503372588343174642}
   - component: {fileID: 7503372588343174643}
   - component: {fileID: -2809126935506347135}
+  - component: {fileID: 6470698590652637741}
   m_Layer: 15
   m_Name: VRLocalPlayer
   m_TagString: Untagged
@@ -1220,23 +1220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
---- !u!114 &6470698590652637741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7503372588343174644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5531481130ba4e248bdbb7f4b24fe6d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LeftHand: {fileID: 7503372588465349100}
-  RightHand: {fileID: 7503372588931174443}
-  PlaySpace: {fileID: 7503372588343174644}
-  CameraOffset: {fileID: 7503372587520897683}
-  Camera: {fileID: 7503372588622639802}
 --- !u!114 &7503372588343174642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,6 +1296,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftHand: {fileID: 7503372588465349100}
   RightHand: {fileID: 7503372588931174443}
+--- !u!114 &6470698590652637741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503372588343174644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5531481130ba4e248bdbb7f4b24fe6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHand: {fileID: 7503372588465349100}
+  RightHand: {fileID: 7503372588931174443}
+  PlaySpace: {fileID: 7503372588343174644}
+  CameraOffset: {fileID: 7503372587520897683}
+  Camera: {fileID: 7503372588622639802}
 --- !u!1 &7503372588465349101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,7 +1327,7 @@ GameObject:
   - component: {fileID: 7503372588465349098}
   - component: {fileID: 7503372588465349099}
   - component: {fileID: 7503372588465349092}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: LeftHand Controller
   m_TagString: LeftController
   m_Icon: {fileID: 0}
@@ -1671,7 +1671,7 @@ GameObject:
   - component: {fileID: 7503372588931174438}
   - component: {fileID: 7503372588931174442}
   - component: {fileID: 6470698591342805703}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: RightHand Controller
   m_TagString: RightController
   m_Icon: {fileID: 0}
@@ -1897,7 +1897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803744}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,7 +1934,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803746}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1964,7 +1964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803748}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_index1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1995,7 +1995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803750}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_hand_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2025,7 +2025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803752}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_index3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2056,7 +2056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803754}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_index2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2087,7 +2087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803756}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_middle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803758}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_index_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2148,7 +2148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803760}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_middle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2179,7 +2179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803762}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_middle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2210,7 +2210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803764}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_pinky0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2241,7 +2241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803766}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_middle_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2271,7 +2271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803768}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_pinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2302,7 +2302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803770}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_pinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2333,7 +2333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803772}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_pinky_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2363,7 +2363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803774}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_pinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2394,7 +2394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803712}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_ring2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2425,7 +2425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803714}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_ring1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2456,7 +2456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803716}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_ring_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,7 +2486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803718}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_ring3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2517,7 +2517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803720}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_thumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2548,7 +2548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803722}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_thumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2579,7 +2579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803724}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_thumb_ignore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2609,7 +2609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803726}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:b_l_thumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2640,7 +2640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803728}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:l_hand_world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2671,7 +2671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612666470314803730}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:hands_geom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2703,7 +2703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7612666470314803732}
   - component: {fileID: 7612666470307392962}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: Left Hand Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2755,7 +2755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7612666470314803734}
   - component: {fileID: 7612666470311596802}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: hands:Lhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

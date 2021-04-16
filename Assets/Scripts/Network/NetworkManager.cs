@@ -93,7 +93,6 @@ public class NetworkManager : MonoBehaviour
 
     public void SetObjectLocation(int _id, int _objectNetID, Vector3 _pos, Quaternion _rot)
     {
-        Debug.Log("Being told to move this fella");
         if (TrackedObjects.ContainsKey(_objectNetID))
         {
             TrackedObjects[_objectNetID].SetLocation(_pos, _rot);

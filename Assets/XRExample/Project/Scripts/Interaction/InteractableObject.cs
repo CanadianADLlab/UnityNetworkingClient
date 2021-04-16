@@ -61,14 +61,21 @@ namespace EpicXRCrossPlatformInput
 
         private bool oldColliderTrigger = false;
 
-        private void Start()
+        private bool initalized = false;
+
+        private void Init() // Move from start to init because unity is fucked
         {
-            leftController = XRPositionManager.Instance.LeftHand.GetComponent<Controller>();
-            rightController = XRPositionManager.Instance.RightHand.GetComponent<Controller>();
-            rb = GetComponent<Rigidbody>();
-            if (rb == null)
+            if (!initalized && XRPositionManager.Instance)
             {
-                Debug.LogError("No rigidbody attatched please attatch one in the inspector");
+                print("we're never setting this are we");
+                leftController = XRPositionManager.Instance.LeftHand.GetComponent<Controller>();
+                rightController = XRPositionManager.Instance.RightHand.GetComponent<Controller>();
+                rb = GetComponent<Rigidbody>();
+                if (rb == null)
+                {
+                    Debug.LogError("No rigidbody attatched please attatch one in the inspector");
+                }
+                initalized = true;
             }
         }
 
@@ -80,8 +87,9 @@ namespace EpicXRCrossPlatformInput
 
         private void Update()
         {
-            if (IsGrabEnabled)
+            if (IsGrabEnabled && XRCrossPlatformInputManager.Instance )
             {
+                Init();
                 CheckWasGrabbed();
                 UpdateGrabButton();
                 CalculatedAverageVelocity();
