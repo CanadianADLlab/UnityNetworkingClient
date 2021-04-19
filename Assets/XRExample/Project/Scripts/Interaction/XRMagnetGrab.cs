@@ -87,7 +87,6 @@ namespace EpicXRCrossPlatformInput
             if (isMagneticGrabbing && !xrGamePad.IsGrabbing)
             {
                 RaycastHit hit;
-                print("True setting active");
                 tractorBeam.SetActive(true);
                 if (Physics.Raycast(transform.position,transform.TransformDirection(RaycastDirection), out hit, GrabDistance, GrabLayer))
                 {

@@ -67,7 +67,6 @@ namespace EpicXRCrossPlatformInput
         {
             if (!initalized && XRPositionManager.Instance)
             {
-                print("we're never setting this are we");
                 leftController = XRPositionManager.Instance.LeftHand.GetComponent<Controller>();
                 rightController = XRPositionManager.Instance.RightHand.GetComponent<Controller>();
                 rb = GetComponent<Rigidbody>();
