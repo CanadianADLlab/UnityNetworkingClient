@@ -81,7 +81,47 @@ Open up packet.cs in the unity project and add intRespond to the ServerPackets e
 Now open up the server code if you haven't pulled it you can do so from here https://github.com/CanadianADLlab/UnityNetworkingServer and paste the enums over top of the same 
 enums in the packets.cs file on the server.
 Next in the client unity project add a function called SendInt(int _num) to the ClientSend.cs script (copy the screenshot below).
-![packet](https://user-images.githubusercontent.com/39784801/115256420-31f14e80-a0fd-11eb-9f14-9ae23fe3de75.png)
+<br>
+![SendIntPacket](https://user-images.githubusercontent.com/39784801/115270412-47b94080-a10a-11eb-8ba6-5db425c32f13.png)
+<br>
+
+Back in the SendClick() function in the PlayerUIManager add the line ClientSend(rand); (or send any int with it doesn't matter for this)
+<br>
+![Sendint](https://user-images.githubusercontent.com/39784801/115268550-61598880-a108-11eb-8ca6-8f9d649de943.png)
+<br>
+Okay the next few changes we have to make are on the server side so open up the server code and let's deal with the what happens when we receive a packet.
+<br>
+In the server.cs we need to add a line to the InitializeServerData() function, add  {(int)ClientPackets.intSend,ServerHandle.SendIntToEveryone} to the packetHandlers,
+basically this just tells the server when that ClientPackets.intSent value is received it will call the function ServerHandle.SendIntToEveryone.
+<br>
+There is an error because the function is still yet to be added to the ServerHandle which we will do next.
+![packethandlers](https://user-images.githubusercontent.com/39784801/115269233-1b50f480-a109-11eb-98a6-1a0b2647697f.png)
+<br>
+Now inside ServerHandle.cs add this function, it just tells the ServerSend.cs to send the int to everyone. The ServerSend.SendIntToEveryone will be underlined because we 
+have yet to add it.
+<br>
+![sendinttoeveryonewithroomid](https://user-images.githubusercontent.com/39784801/115270537-6586a580-a10a-11eb-972b-f20c34a31e71.png)
+<br>
+Now let's write the SendIntToEveryone function, all we need to do is write that random int to a package and then call SendTCPDataToAll (copy screenshot below)
+, also if you wanted to send to a specific client you can use SendTCPData and specify the  clientid to send to, and if you want to use udp just change the TCP to UDP like SendUDPDataToAll.
+<br>
+![sendinttoeevryoneserversend](https://user-images.githubusercontent.com/39784801/115271089-f65d8100-a10a-11eb-8d59-640f86880dac.png)
+<br>
+Okay now let's go back to the client side unity project and handle the data for this example let's just log the received value.
+<br>
+First lets go to the InitializeClientData() in the Client.cs file and add   {(int)ServerPackets.intRespond,ClientHandle.PrintInt } to the packetHandlers this will just call
+the PrintInt function for the client.
+<br>
+![addthisguy](https://user-images.githubusercontent.com/39784801/115271775-b0ed8380-a10b-11eb-883d-7fe9cf5f3442.png)
+<br>
+Finally make the function PrintInt inside the ClientHandle.cs class. 
+![printintclienthandle](https://user-images.githubusercontent.com/39784801/115273751-f0b56a80-a10d-11eb-9744-7ec08f32b1c7.png)
+
+Now make a build of the project, run the server connect via the Unity editor (so we can see the print) and connect via the build as the other player.
+On the build click the button and you should see a random int locked in the editor.
+
+
+
 
 
 
