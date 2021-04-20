@@ -34,6 +34,14 @@ public class Client : MonoBehaviour
         Udp = new UDP();
     }
 
+    public void Disconnect()
+    {
+        Tcp.Disconnect();
+        Udp.Disconnect();
+        Tcp = null;
+        Udp = null;
+        IsConnected = false;
+    }
     public void ConnectToServer()
     {
         InitializeClientData();
@@ -53,6 +61,22 @@ public class Client : MonoBehaviour
 
         public TCP()
         {
+        }
+        public void Disconnect()
+        {
+            if (stream != null)
+            {
+                stream.Flush();
+                stream.Close(); // close the stream from this
+                stream = null;
+            }
+            if (Socket != null)
+            {
+                Socket.Close();
+                Socket = null;
+            }
+            receiveBuffer = null;
+            receivedData = null;
         }
         public void SendData(Packet _packet)
         {
@@ -95,16 +119,19 @@ public class Client : MonoBehaviour
         {
             try
             {
-                int _byteLength = stream.EndRead(_result);
-                if (_byteLength <= 0)
+                if (stream != null)
                 {
-                    return;
-                }
-                byte[] _data = new byte[_byteLength];
-                Array.Copy(receiveBuffer, _data, _byteLength);
+                    int _byteLength = stream.EndRead(_result);
+                    if (_byteLength <= 0)
+                    {
+                        return;
+                    }
+                    byte[] _data = new byte[_byteLength];
+                    Array.Copy(receiveBuffer, _data, _byteLength);
 
-                receivedData.Reset(HandleData(_data));
-                stream.BeginRead(receiveBuffer, 0, DataBufferSize, ReceiveCallBack, null);
+                    receivedData.Reset(HandleData(_data));
+                    stream.BeginRead(receiveBuffer, 0, DataBufferSize, ReceiveCallBack, null);
+                }
             }
             catch (Exception e)
             {
@@ -159,6 +186,10 @@ public class Client : MonoBehaviour
         public UdpClient Socket;
         public IPEndPoint EndPoint;
 
+        public void Disconnect()
+        {
+            EndPoint = null; // there might be a way to dc a udp im not sure but for now fuck it
+        }
         public UDP()
         {
             EndPoint = new IPEndPoint(IPAddress.Parse(Instance.IP), Instance.Port);
