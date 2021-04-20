@@ -40,6 +40,8 @@ public class NetworkManager : MonoBehaviour
     {
         Debug.Log("Disconnecting " + Client.Instance.MyID);
         ClientSend.SendDisconnect(); // Tell the server we bailing
+        Client.Instance.Disconnect();
+        Destroy(this);
     }
 
     public void MovePlayer(int _id, Vector3 _pos, Quaternion _rot, bool _lerp)

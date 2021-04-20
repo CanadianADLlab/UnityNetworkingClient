@@ -23,11 +23,11 @@ public class Client : MonoBehaviour
     [HideInInspector]
     public UDP Udp;
 
-  
+
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
     void Start()
-    { 
+    {
         Tcp = new TCP();
         Udp = new UDP();
     }
@@ -37,7 +37,14 @@ public class Client : MonoBehaviour
         InitializeClientData();
         Tcp.Connect();
     }
-
+    public void Disconnect()
+    {
+        Tcp.Disconnect();
+        Udp.Disconnect();
+        Tcp = null;
+        Udp = null;
+        IsConnected = false;
+    }
     public class TCP
     {
         public TcpClient Socket;
@@ -48,6 +55,23 @@ public class Client : MonoBehaviour
 
         public TCP()
         {
+
+        }
+        public void Disconnect()
+        {
+            if (stream != null)
+            {
+                stream.Flush();
+                stream.Close(); // close the stream from this
+                stream = null;
+            }
+            if (Socket != null)
+            {
+                Socket.Close();
+                Socket = null;
+            }
+            receiveBuffer = null;
+            receivedData = null;
         }
         public void SendData(Packet _packet)
         {
@@ -60,7 +84,7 @@ public class Client : MonoBehaviour
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error sending data to player " + e);
+                Debug.Log("Error sending data to player " + e);
             }
         }
 
@@ -83,6 +107,10 @@ public class Client : MonoBehaviour
                 return;
             }
             stream = Socket.GetStream();
+            if (stream == null)
+            {
+                return;
+            }
             receivedData = new Packet();
             stream.BeginRead(receiveBuffer, 0, DataBufferSize, ReceiveCallBack, null);
         }
@@ -90,16 +118,19 @@ public class Client : MonoBehaviour
         {
             try
             {
-                int _byteLength = stream.EndRead(_result);
-                if (_byteLength <= 0)
+                if (stream != null)
                 {
-                    return;
-                }
-                byte[] _data = new byte[_byteLength];
-                Array.Copy(receiveBuffer, _data, _byteLength);
+                    int _byteLength = stream.EndRead(_result);
+                    if (_byteLength <= 0)
+                    {
+                        return;
+                    }
+                    byte[] _data = new byte[_byteLength];
+                    Array.Copy(receiveBuffer, _data, _byteLength);
 
-                receivedData.Reset(HandleData(_data));
-                stream.BeginRead(receiveBuffer, 0, DataBufferSize, ReceiveCallBack, null);
+                    receivedData.Reset(HandleData(_data));
+                    stream.BeginRead(receiveBuffer, 0, DataBufferSize, ReceiveCallBack, null);
+                }
             }
             catch (Exception e)
             {
@@ -111,16 +142,16 @@ public class Client : MonoBehaviour
             int _packetLength = 0;
 
             receivedData.SetBytes(_data);
-            if(receivedData.UnreadLength() >= 4) // means an id was sent because an int contains 4 bytes
+            if (receivedData.UnreadLength() >= 4) // means an id was sent because an int contains 4 bytes
             {
                 _packetLength = receivedData.ReadInt();
-                if(_packetLength <= 0)
+                if (_packetLength <= 0)
                 {
                     return true;
                 }
             }
 
-            while(_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
+            while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
             {
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
                 ThreadManager.ExecuteOnMainThread(() =>
@@ -142,7 +173,7 @@ public class Client : MonoBehaviour
                 }
             }
 
-            if(_packetLength <= 1)
+            if (_packetLength <= 1)
             {
                 return true;
             }
@@ -158,7 +189,10 @@ public class Client : MonoBehaviour
         {
             EndPoint = new IPEndPoint(IPAddress.Parse(Instance.IP), Instance.Port);
         }
-
+        public void Disconnect()
+        {
+            EndPoint = null; // there might be a way to dc a udp im not sure but for now fuck it
+        }
         public void Connect(int _localPort)
         {
             Socket = new UdpClient(_localPort);
@@ -175,7 +209,7 @@ public class Client : MonoBehaviour
             try
             {
                 _packet.InsertInt(Instance.MyID);
-                if(Socket != null)
+                if (Socket != null)
                 {
                     Socket.BeginSend(_packet.ToArray(), _packet.Length(), null, null);
                 }
@@ -193,13 +227,13 @@ public class Client : MonoBehaviour
                 byte[] _data = Socket.EndReceive(_result, ref EndPoint);
                 Socket.BeginReceive(ReceiveCallBack, null);
 
-                if(_data.Length < 4)
+                if (_data.Length < 4)
                 {
                     return;
                 }
                 HandleData(_data);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.LogError(e);
             }
@@ -223,6 +257,7 @@ public class Client : MonoBehaviour
             });
         }
     }
+
     private void InitializeClientData()
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
