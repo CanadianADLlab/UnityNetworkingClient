@@ -1,5 +1,5 @@
 # UnityNetworkingClient 
-Quick guide for setting up this example.
+Quick guide for setting up this example. Unity version built in is 2020.3.4f1 but will most likely work with older versions. 
 
 <h1>Overview</h1>
 
