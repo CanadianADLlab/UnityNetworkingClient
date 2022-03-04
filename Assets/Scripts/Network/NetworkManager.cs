@@ -16,7 +16,6 @@ public class NetworkManager : MonoBehaviour
     public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation, bool _isVR)
     {
         GameObject _player;
-        Debug.Log("this should be a vr guy is it  " + _isVR);
         if (!_isVR)
         {
             if (_id == Client.Instance.MyID)
@@ -30,7 +29,6 @@ public class NetworkManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("spawning vr player fagot");
             if (_id == Client.Instance.MyID)
             {
                 _player = GameObject.Instantiate(LocalVRPlayerPrefab, _position, _rotation);
